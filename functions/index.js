@@ -6,6 +6,6 @@ const app = express();
 
 app.use(express.json());
 
-app.use('/users',require('./services/user/controller'))
+app.use('/auth',require('./services/user/controller'))
 
 exports.app = functions.https.onRequest(app)
