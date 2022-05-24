@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+  </head>
+  <body>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.3/firebase-auth.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+
+    <script>
+ const firebaseConfig = {
+  apiKey: "AIzaSyALyFga1QtC4o73v8TN6g5Y_k3wB509msw",
+  authDomain: "node-express-dc5f8.firebaseapp.com",
+  projectId: "node-express-dc5f8",
+  storageBucket: "node-express-dc5f8.appspot.com",
+  messagingSenderId: "42399992621",
+  appId: "1:42399992621:web:0baf4d3a6e9730f8fc61a4"
+};
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig)
+
+      async function onLogin(email, password) {
+        try {
+          const userRecord = await firebase.auth().signInWithEmailAndPassword(email, password)
+          const idToken = await userRecord.user.getIdToken()
+          console.log(idToken)
+        } catch (error) {
+          console.error(error)
+        }
+      }
+
+    </script>
+    <button onclick='onLogin("vamsi@gmail.com", "123456")' >Login</button>
+  </body>
+</html>

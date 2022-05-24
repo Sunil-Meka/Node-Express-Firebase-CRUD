@@ -2,6 +2,9 @@ const { firestore } = require("firebase-admin");
 const { admin, db } = require("../../utils/admin");
 
 class Model {
+	constructor(user){
+		this.actionperformer = user
+	}
   async _createUser(inputs) {
     return admin
       .auth()
@@ -28,7 +31,7 @@ class Model {
   async _getUser(id) {
     return db
       .collection("USERS")
-      .where("isActive","==",true).where("id","==",id)
+      .where("isActive","==",true).where("id","==",this.actionperformer.id)
       .get()
       .then((snapshot) => {
 		if(snapshot.docs.length>0){

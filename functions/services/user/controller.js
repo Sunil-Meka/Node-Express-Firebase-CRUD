@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const db = require("../../db");
 const Model = require("./model");
+const protected = require("../../protected")
 
 router.post("/createUser", (req, res) => {
   const obj = new Model();
@@ -14,8 +15,8 @@ router.post("/createUser", (req, res) => {
     });
 });
 
-router.get("/getUser/:id", (req, res) => {
-  const obj = new Model();
+router.get("/getUser",protected, (req, res) => {
+  const obj = new Model(req.user);
   const { id } = req.params;
   return obj
     ._getUser(id)
