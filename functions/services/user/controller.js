@@ -23,6 +23,9 @@ router.get("/getUser/:id", (req, res) => {
       return res.status(200).json(user);
     })
     .catch((err) => {
+		if(err.toString().match("User not found")){
+			return res.status(404).json({ message: `User not found` });
+		}
       return res.status(400).json({ message: `failed to get user` });
     });
 });

@@ -28,11 +28,14 @@ class Model {
   async _getUser(id) {
     return db
       .collection("USERS")
-      .doc(id)
+      .where("isActive","==",true).where("id","==",id)
       .get()
-      .then((user) => {
-        console.log(user.data());
-        return user.data();
+      .then((snapshot) => {
+		if(snapshot.docs.length>0){
+			return snapshot.docs[0].data();
+		}else{
+			throw new Error("User not found");
+		}
       })
       .catch((err) => {
         throw err;
@@ -41,7 +44,7 @@ class Model {
 
   async _getUsers() {
     return db
-      .collection("USERS")
+      .collection("USERS").where("isActive","==",true)
       .get()
       .then((users) => {
         let usersInfo = [];
